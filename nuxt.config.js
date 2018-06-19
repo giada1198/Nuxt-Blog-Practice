@@ -15,7 +15,7 @@ module.exports = {
   },
   router: {
     base: '/giada-website/'
-  }
+  },
   /*
   ** Customize the progress bar color
   */
