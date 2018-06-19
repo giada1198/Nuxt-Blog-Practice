@@ -1,11 +1,11 @@
 {
-  "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
   "name": "giada-website",
   "version": "1.0.0",
   "description": "Nuxt.js project",
   "author": "Giada Sun <syuanchs@andrew.cmu.edu>",
   "private": true,
   "scripts": {
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
