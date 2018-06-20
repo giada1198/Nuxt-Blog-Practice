@@ -1,52 +1,64 @@
-<template>
-  <div>
-    <nuxt/>
-  </div>
-</template>
+<template lang="pug">
+  div
+    TheHeader(:icon='windowWidth <= 768'
+              v-on:sidenavToggle="sidenavToggle()")
+    TheSidenav(:show="displaySidenav"
+               v-on:close="sidenavToggle('close')")
+    nuxt
+</template> 
 
-<style>
-html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+<script>
+import TheHeader from '@/components/Navigation/TheHeader';
+import TheSidenav from '@/components/Navigation/TheSidenav';
 
-*, *:before, *:after {
-  box-sizing: border-box;
-  margin: 0;
-}
+export default {
+  components: {
+    TheHeader,
+    TheSidenav
+  },
+  data() {
+    return {
+      displaySidenav: false,
+      windowWidth: 0,
+      windowHeight: 0
+    }
+  },
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
+  mounted() {
+    this.$nextTick(function() {
+      window.addEventListener('resize', this.getWindowWidth);
+      window.addEventListener('resize', this.getWindowHeight);
+      this.getWindowWidth()
+      this.getWindowHeight()
+    })
+  },
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+  methods: {
+    sidenavToggle: function(order) {
+      if(order === 'close') {
+        this.displaySidenav = false;
+      } else {
+        this.displaySidenav = !this.displaySidenav;
+      }
+    },
+    getWindowWidth(event) {
+      this.windowWidth = document.documentElement.clientWidth;
+    },
+    getWindowHeight(event) {
+      this.windowHeight = document.documentElement.clientHeight;
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.getWindowWidth);
+      window.removeEventListener('resize', this.getWindowHeight);
+    }
+  }
 }
+</script>
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
+<style lang="sass">
+  html
+    font-family: 'Roboto', sans-serif
+  
+  body
+    margin: 0px
 </style>
