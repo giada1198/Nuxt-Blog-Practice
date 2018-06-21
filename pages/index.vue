@@ -2,25 +2,23 @@
   .home-page
     .intro
       h1 Get the lastest tech news!
-    .featured-posts
-      PostPreview(
-        id='1' title='Hello! there!' previewText='This is my first post!'
-        thumbnail='https://www.taiwansuzuki.com.tw/uploads/images/car/swift/inner%20page/detail-01.png')
+    PostList
 </template>
 
 <script>
-import PostPreview from '@/components/Posts/PostPreview'
+import PostList from '@/components/Posts/PostList'
 
 export default {
   components: {
-    PostPreview: PostPreview
+    PostList: PostList
   }
 }
 </script>
 
 <style scoped lang="sass">
 .intro
-  height: 300px
+  height: 360px
+  top: -60px
   position: relative
   padding: 30px
   box-sizing: border-box
@@ -30,7 +28,7 @@ export default {
 
 .intro h1
   position: absolute
-  top: 10%
+  top: 20%
   left: 5%
   width: 90%
   font-size: 1.5rem

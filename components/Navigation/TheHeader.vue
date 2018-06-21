@@ -1,8 +1,10 @@
 <template lang="pug">
 .header-container
-  header.the-header
+  header.the-header(v-bind:class="{'the-header-top':isTop}")
     transition(name="iconTransition")
-      TheSideNavToggle(v-show='icon' v-on:toggle="$emit('sidenavToggle')")
+      TheSideNavToggle(:top='isTop'
+                       v-show='icon'
+                       v-on:toggle="$emit('sidenavToggle')")
     .logo
       nuxt-link(to="/") GIADA BLOG LITE
     .spacer
@@ -31,12 +33,38 @@ export default {
       default: false
     }
   },
+
   data() {
     return {
-      toggle: false
+      toggle: false,
+      isTop: true
     }
   },
-  
+
+  mounted() {
+    this.$nextTick(function() {
+      window.addEventListener("scroll", this.handleScroll);
+    })
+  },
+
+  methods: {
+    handleScroll() {
+      this.isTop = (window.scrollY === 0);
+      console.log('hi');
+      // if (this.lastPosition < window.scrollY && this.limitPosition < window.scrollY) {
+      //   this.scrolled = true;
+      // }
+      // if (this.lastPosition > window.scrollY) {
+      //   this.scrolled = false; // move down
+      // }
+      // this.lastPosition = window.scrollY;
+      // // this.scrolled = window.scrollY > 250;
+    }
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
 };
 </script>
 
@@ -56,6 +84,8 @@ export default {
   z-index: 100
   box-sizing: border-box
   padding: 0 20px
+  opacity: 1
+  transition-duration: 1s
 
 .iconTransition-enter-active, .iconTransition-leave-active
   transition: opacity .5s
@@ -109,6 +139,11 @@ export default {
   font-size: 14px
   font-weight: 300
   letter-spacing: 2px
+
+.the-header-top
+  .logo a, .nav-item a
+    color: white
+  background-color: transparent
 
 .nav-item a:hover,
 .nav-item a:active,

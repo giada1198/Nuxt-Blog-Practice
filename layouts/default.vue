@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    TheHeader(:icon='windowWidth <= 768'
+    TheHeader(:icon='windowWidth < 768'
               v-on:sidenavToggle="sidenavToggle()")
     TheSidenav(:show="displaySidenav"
                v-on:close="sidenavToggle('close')")
@@ -20,7 +20,11 @@ export default {
     return {
       displaySidenav: false,
       windowWidth: 0,
-      windowHeight: 0
+      windowHeight: 0,
+
+      limitPosition: 500,
+      scrolled: false,
+      lastPosition: 0
     }
   },
 
