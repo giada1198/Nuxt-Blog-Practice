@@ -107,6 +107,7 @@ export default {
   font-size: 1.3rem
   font-weight: 300
   transition-duration: 0.5s
+  // text-shadow: 2px 2px #111
 
 .logo a
   text-decoration: none
@@ -131,14 +132,14 @@ export default {
   display: flex
 
 .nav-item
-  margin: 0 10px
+  margin: 0 7.5px
 
 .nav-item a
   text-decoration: none
   color: black
   font-size: 14px
   font-weight: 300
-  letter-spacing: 2px
+  letter-spacing: 1.75px
 
 .the-header-top
   .logo a, .nav-item a

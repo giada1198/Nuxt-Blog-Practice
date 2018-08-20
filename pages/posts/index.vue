@@ -1,6 +1,6 @@
 <template lang="pug">
   posts-page
-    PostList
+    PostList(v-bind:posts='loadedPosts')
 </template>
 
 <script>
@@ -8,9 +8,14 @@ import PostList from '@/components/Posts/PostList'
 
 export default {
   components: {
-    PostList: PostList
+    PostList
+  },
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts;
+    }
   }
-}
+};
 </script>
 
 <style scoped lang="sass">

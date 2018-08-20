@@ -1,6 +1,6 @@
 <template lang="pug">
-  nuxt-link(v-bind:to="'/posts/' + id")
-    article.post-preview
+  nuxt-link.post-preview(v-bind:to='postLink')
+    article
       .post-thumbnail(v-bind:style="{backgroundImage: 'url(' + thumbnail + ')'}") 
       .post-content
         h1 {{ title }}
@@ -15,6 +15,10 @@ export default {
       type: String,
       required: true
     },
+    isAdmin: {
+      type: Boolean,
+      required: true
+    },
     title: {
       type: String,
       required: true
@@ -26,7 +30,12 @@ export default {
     thumbnail: {
       type: String,
       required: true
-    },
+    }
+  },
+  computed: {
+    postLink() {
+      return this.isAdmin ? '/admin/' + this.id : '/posts/' + this.id
+    }
   }
 }
 </script>

@@ -1,8 +1,13 @@
 <template lang="pug">
   section.post-list
     PostPreview(
-      id='1' title='Hello! there!' previewText='This is my first post!'
-      thumbnail='https://www.taiwansuzuki.com.tw/uploads/images/car/swift/inner%20page/detail-01.png')
+      v-bind:is-admin='isAdmin'
+      v-for='post in posts'
+      v-bind:key='post.id'
+      v-bind:id='post.id'
+      v-bind:thumbnail='post.thumbnail'
+      v-bind:title='post.title'
+      v-bind:previewText='post.previewText')
 </template>
 
 <script>
@@ -11,6 +16,16 @@ import PostPreview from '@/components/Posts/PostPreview'
 export default {
   components: {
     PostPreview: PostPreview
+  },
+  props: {
+    isAdmin: {
+      type: Boolean,
+      default: false
+    },
+    posts: {
+      type: Array,
+      required: true
+    }
   }
 }
 </script>

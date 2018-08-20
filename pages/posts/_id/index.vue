@@ -1,11 +1,11 @@
 <template lang="pug">
   .single-post-page
     .post
-      h1.post-title Title of the Post
+      h1.post-title {{ loadedPost.title }}
       .post-details
-        .post-detail Last updated on XXX
-        .post-detail Written by Name
-      p.post-content Content of the post
+        .post-detail Last updated on {{ loadedPost.updatedDate }}
+        .post-detail Written by {{ loadedPost.author }}
+      p.post-content {{ loadedPost.content }}
     .post-feedback
       p
         | Let me know what you think about the post, send a mail to 
@@ -13,22 +13,24 @@
         | .
 </template>
 
+<script>
+import axios from 'axios';
+
+export default {
+  asyncData(context) {
+    return axios.get('https://nuxt-blog-1198.firebaseio.com/posts/' + context.params.id + '.json')
+      .then(res => {
+        return {
+          loadedPost: res.data
+        }
+      })
+      .catch(e => comtext.error(e));
+  }
+}
+</script>
+
+
 <style scoped lang="sass">
-*
-  // border: solid 1px black
-
-// html, body
-//   width: 100%
-//   height: 100%
-//   margin: 0px
-//   padding: 0px
-//   background: red
-
-//   display: flex
-//   justify-content: center
-//   align-items: center
-//   flex-direction: column
-
 .single-post-page
   height: 100%
   padding: 30px

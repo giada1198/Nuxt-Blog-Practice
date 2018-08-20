@@ -2,7 +2,7 @@
   .home-page
     .intro
       h1 Get the lastest tech news!
-    PostList
+    PostList(v-bind:posts='loadedPosts')
 </template>
 
 <script>
@@ -10,7 +10,12 @@ import PostList from '@/components/Posts/PostList'
 
 export default {
   components: {
-    PostList: PostList
+    PostList
+  },
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts;
+    }
   }
 }
 </script>
