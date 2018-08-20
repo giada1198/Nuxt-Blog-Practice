@@ -3,7 +3,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'giada-website',
+    title: 'Nuxt-Blog-Practice',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -15,7 +15,7 @@ module.exports = {
     ]
   },
   router: {
-    base: '/giada-website/'
+    base: '/Nuxt-Blog-Practice/'
   },
   /*
   ** Customize the progress bar color
